@@ -1,0 +1,174 @@
+
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+<div id="chartContainer">
+  <script src="/lib/d3.v3.4.8.js"></script>
+  <script src="/dist/dimple.v2.1.6.js"></script>
+  <script src="/d3/d3.min.js"></script>
+
+  <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+   <style>
+
+  
+			 
+			 .dimple-custom-axis-label
+			 {
+			  font-family: Lato !important;
+			  font-size: 12px !important;
+			  stroke-width: 0.5;
+			  }
+
+			  
+			  .dimple-custom-axis-line
+			 {
+			  stroke: #000000 !important;
+			  stroke-width: 0;
+			 }
+			 
+			 text.dimple-tooltip {
+			  font-family: Lato !important;
+			  font-size: 13px !important;
+			}
+
+      #chartContainer{
+        height: 350px;
+      }
+			 
+			 
+
+  </style>
+  <script type="text/javascript">
+     var svg = dimple.newSvg("#chartContainer", "100%", "100%");  
+    d3.csv("Calls_Presented_final5.csv", function (data) {
+      //data = dimple.filterData(data, "Owner", ["Aperture", "Black Mesa"])
+      var myChart = new dimple.chart(svg, data);
+      myChart.setMargins("100px", "30px", "100px", "60px");
+      var x = myChart.addTimeAxis("x", "Month", "%m-%d-%Y", "%b-%y");
+	  x.timePeriod = d3.time.months;
+	  x.timeInterval = 4;	  
+	  x.title = "";
+      var y= myChart.addMeasureAxis("y", "Calls");
+	  y.title = "";
+	  var s = myChart.addSeries(null, dimple.plot.area);
+	  s.lineWeight = 1;
+	   myChart.defaultColors = [
+			new dimple.color("#2185C5"),
+]; 
+	  s.interpolation = "cardinal";     
+      //myChart.addLegend(60, 10, 500, 20, "right");
+	  
+	  var c = new dimple.chart(svg, data);
+		c.draw();
+	  		
+      myChart.draw();
+
+
+	  
+	  
+  
+// Add a title with some d3
+/*	svg.append("text")
+   .attr("x", c._xPixels() + c._widthPixels() / 8.5)
+   .attr("y", c._yPixels() + 180)
+   .style("text-anchor", "middle")
+   .style("font-size", "16px")
+   .style("font-family", "Lato")
+   //.style("font-weight", "bold")
+   .text("Transit Strike");
+   
+   // Add a title with some d3
+	svg.append("text")
+   .attr("x", c._xPixels() + c._widthPixels() / 2.7)
+   .attr("y", c._yPixels() + 170)
+   .style("text-anchor", "middle")
+   .style("font-size", "16px")
+   .style("font-family", "Lato")
+   //.style("font-weight", "bold")
+   .text("2008 Election");
+   
+      // Add a title with some d3
+	svg.append("text")
+   .attr("x", c._xPixels() + c._widthPixels() / 2.0)
+   .attr("y", c._yPixels() + 129)
+   .style("text-anchor", "middle")
+   .style("font-size", "16px")
+   .style("font-family", "Lato")
+   //.style("font-weight", "bold")
+   .text("Snowicane");
+   
+         // Add a title with some d3
+	svg.append("text")
+   .attr("x", c._xPixels() + c._widthPixels() / 1.78)
+   .attr("y", c._yPixels() + 1)
+   .style("text-anchor", "middle")
+   .style("font-size", "16px")
+   .style("font-family", "Lato")
+   //.style("font-weight", "bold")
+   .text("Blizzard");
+	  
+	           // Add a title with some d3
+	svg.append("text")
+   .attr("x", c._xPixels() + c._widthPixels() / 1.5)
+   .attr("y", c._yPixels() + 152)
+   .style("text-anchor", "middle")
+   .style("font-size", "16px")
+   .style("font-family", "Lato")
+   //.style("font-weight", "bold")
+   .text("Irene");
+	  
+	  	           // Add a title with some d3
+	svg.append("text")
+   .attr("x", c._xPixels() + c._widthPixels() / 1.38)
+   .attr("y", c._yPixels() + 58)
+   .style("text-anchor", "middle")
+   .style("font-size", "16px")
+   .style("font-family", "Lato")
+   //.style("font-weight", "bold")
+   .text("Sandy");
+   
+   	  	           // Add a title with some d3
+	svg.append("text")
+   .attr("x", c._xPixels() + c._widthPixels() / 1.21)
+   .attr("y", c._yPixels() + 45)
+   .style("text-anchor", "middle")
+   .style("font-size", "16px")
+   .style("font-family", "Lato")
+   //.style("font-weight", "bold")
+   .text("Snow");
+   
+      	  	           // Add a title with some d3
+	svg.append("text")
+   .attr("x", c._xPixels() + c._widthPixels() / 1.04)
+   .attr("y", c._yPixels() + 45)
+   .style("text-anchor", "middle")
+   .style("font-size", "16px")
+   .style("font-family", "Lato")
+   //.style("font-weight", "bold")
+   .text("Snow & IDNYC");*/
+	  
+      	  	           // Add a title with some d3
+	svg.append("text")
+   .attr("x", c._xPixels() + c._widthPixels() / 6)
+   .attr("y", c._yPixels() + 55)
+   .style("text-anchor", "middle")
+   .style("font-size", "30px")
+   .style("font-family", "Lato")
+   //.style("font-weight", "600")
+   .text("NYC 311 Total Calls");
+
+   
+   // Add a method to draw the chart on resize of the window
+window.onresize = function () {
+    // As of 1.1.0 the second parameter here allows you to draw
+    // without reprocessing data.  This saves a lot on performance
+    // when you know the data won't have changed.
+    myChart.draw(0, true);
+};
+	 
+	  
+	  
+    });
+  </script>
+
+</html>
